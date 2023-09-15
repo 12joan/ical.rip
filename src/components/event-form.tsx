@@ -1,21 +1,27 @@
-import { Calendar as CalendarIcon } from "lucide-react"
-import { format } from 'date-fns'
-import { cn } from "@/lib/utils"
-import { Input } from '@/components/ui/input'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
-import { Calendar } from '@/components/ui/calendar'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { CalendarEvent, ValidationError } from '@/types'
-import { FormField } from '@/components/form-field'
+import React from 'react';
+import { format } from 'date-fns';
+import { Calendar as CalendarIcon } from 'lucide-react';
+
+import { FormField } from '@/components/form-field';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
+import { CalendarEvent, ValidationError } from '@/types';
 
 export interface EventFormProps {
-  calendarEvent: Partial<CalendarEvent>
-  setCalendarEvent: (calendarEvent: Partial<CalendarEvent>) => void
-  validationErrors: ValidationError[]
-  onSubmit: () => void
-  onReset: () => void
+  calendarEvent: Partial<CalendarEvent>;
+  setCalendarEvent: (calendarEvent: Partial<CalendarEvent>) => void;
+  validationErrors: ValidationError[];
+  onSubmit: () => void;
+  onReset: () => void;
 }
 
 export const EventForm = ({
@@ -34,32 +40,39 @@ export const EventForm = ({
     endTime,
     url,
     description,
-  } = calendarEvent
+  } = calendarEvent;
 
-  const setField = <K extends keyof CalendarEvent>(field: K, value: CalendarEvent[K]) => {
+  const setField = <K extends keyof CalendarEvent>(
+    field: K,
+    value: CalendarEvent[K]
+  ) => {
     setCalendarEvent({
       ...calendarEvent,
       [field]: value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    onSubmit()
-  }
+    e.preventDefault();
+    onSubmit();
+  };
 
   const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    onReset()
-  }
+    e.preventDefault();
+    onReset();
+  };
 
   return (
     <form className="space-y-3" onSubmit={handleSubmit} onReset={handleReset}>
-      <FormField label="Title" field="title" validationErrors={validationErrors}>
+      <FormField
+        label="Title"
+        field="title"
+        validationErrors={validationErrors}
+      >
         {(props) => (
           <Input
             value={title}
-            onChange={(e) => setField("title", e.target.value)}
+            onChange={(e) => setField('title', e.target.value)}
             placeholder="My fabulous event"
             autoFocus
             aria-required
@@ -75,14 +88,14 @@ export const EventForm = ({
               <Button
                 variant="outline"
                 className={cn(
-                  "w-full justify-start text-left font-normal",
-                  !date && "text-muted-foreground"
+                  'w-full justify-start text-left font-normal',
+                  !date && 'text-muted-foreground'
                 )}
                 aria-required
                 {...props}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {date ? format(date, "PPP") : <span>Pick a date</span>}
+                {date ? format(date, 'PPP') : <span>Pick a date</span>}
               </Button>
             </PopoverTrigger>
 
@@ -90,7 +103,7 @@ export const EventForm = ({
               <Calendar
                 mode="single"
                 selected={date}
-                onSelect={(date) => setField("date", date)}
+                onSelect={(date) => setField('date', date)}
                 initialFocus
               />
             </PopoverContent>
@@ -98,11 +111,16 @@ export const EventForm = ({
         )}
       </FormField>
 
-      <FormField label="All day" labelPosition="after" field="allDay" validationErrors={validationErrors}>
+      <FormField
+        label="All day"
+        labelPosition="after"
+        field="allDay"
+        validationErrors={validationErrors}
+      >
         {(props) => (
           <Checkbox
             checked={allDay}
-            onCheckedChange={(checked) => setField("allDay", checked)}
+            onCheckedChange={(checked) => setField('allDay', checked)}
             {...props}
           />
         )}
@@ -110,22 +128,30 @@ export const EventForm = ({
 
       {!allDay && (
         <div className="grid sm:grid-cols-2 gap-3">
-          <FormField label="Start time" field="startTime" validationErrors={validationErrors}>
+          <FormField
+            label="Start time"
+            field="startTime"
+            validationErrors={validationErrors}
+          >
             {(props) => (
               <Input
                 value={startTime}
-                onChange={(e) => setField("startTime", e.target.value)}
+                onChange={(e) => setField('startTime', e.target.value)}
                 placeholder="10:00"
                 {...props}
               />
             )}
           </FormField>
 
-          <FormField label="End time" field="endTime" validationErrors={validationErrors}>
+          <FormField
+            label="End time"
+            field="endTime"
+            validationErrors={validationErrors}
+          >
             {(props) => (
               <Input
                 value={endTime}
-                onChange={(e) => setField("endTime", e.target.value)}
+                onChange={(e) => setField('endTime', e.target.value)}
                 placeholder="11:00"
                 {...props}
               />
@@ -134,11 +160,15 @@ export const EventForm = ({
         </div>
       )}
 
-      <FormField label="Location" field="location" validationErrors={validationErrors}>
+      <FormField
+        label="Location"
+        field="location"
+        validationErrors={validationErrors}
+      >
         {(props) => (
           <Input
             value={location}
-            onChange={(e) => setField("location", e.target.value)}
+            onChange={(e) => setField('location', e.target.value)}
             placeholder="Add a location"
             {...props}
           />
@@ -150,18 +180,22 @@ export const EventForm = ({
           <Input
             type="url"
             value={url}
-            onChange={(e) => setField("url", e.target.value)}
+            onChange={(e) => setField('url', e.target.value)}
             placeholder="https://example.com"
             {...props}
           />
         )}
       </FormField>
 
-      <FormField label="Description" field="description" validationErrors={validationErrors}>
+      <FormField
+        label="Description"
+        field="description"
+        validationErrors={validationErrors}
+      >
         {(props) => (
           <Textarea
             value={description}
-            onChange={(e) => setField("description", e.target.value)}
+            onChange={(e) => setField('description', e.target.value)}
             placeholder="Add a description"
             {...props}
           />
@@ -170,8 +204,10 @@ export const EventForm = ({
 
       <div className="flex max-sm:flex-col gap-2">
         <Button type="submit">Download .ical file</Button>
-        <Button variant="outline" type="reset">Reset form</Button>
+        <Button variant="outline" type="reset">
+          Reset form
+        </Button>
       </div>
     </form>
-  )
-}
+  );
+};

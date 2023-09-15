@@ -1,16 +1,14 @@
-import React, { useMemo } from 'react'
-import { Label } from '@/components/ui/label'
-import { CalendarEvent, ValidationError } from '@/types'
+import React, { useMemo } from 'react';
+
+import { Label } from '@/components/ui/label';
+import { CalendarEvent, ValidationError } from '@/types';
 
 export interface FormFieldProps {
-  label: string
-  labelPosition?: 'before' | 'after'
-  field: keyof CalendarEvent
-  validationErrors: ValidationError[]
-  children: (props: {
-    id: string
-    'aria-invalid': boolean
-  }) => React.ReactNode
+  label: string;
+  labelPosition?: 'before' | 'after';
+  field: keyof CalendarEvent;
+  validationErrors: ValidationError[];
+  children: (props: { id: string; 'aria-invalid': boolean }) => React.ReactNode;
 }
 
 export const FormField = ({
@@ -22,14 +20,10 @@ export const FormField = ({
 }: FormFieldProps) => {
   const fieldErrors = useMemo(
     () => validationErrors.filter((error) => error.field === field),
-    [validationErrors, field],
-  )
+    [validationErrors, field]
+  );
 
-  const labelElement = (
-    <Label htmlFor={field}>
-      {label}
-    </Label>
-  )
+  const labelElement = <Label htmlFor={field}>{label}</Label>;
 
   return (
     <div className="space-y-1">
@@ -45,14 +39,10 @@ export const FormField = ({
       </div>
 
       {fieldErrors.map((error) => (
-        <p
-          key={error.message}
-          className="text-primary text-sm"
-          role="alert"
-        >
+        <p key={error.message} className="text-primary text-sm" role="alert">
           {error.message}
         </p>
       ))}
     </div>
-  )
-}
+  );
+};
