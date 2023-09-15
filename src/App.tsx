@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { EventForm } from '@/components/event-form';
 import { downloadEvent } from '@/lib/downloadEvent';
 import { validateEvent } from '@/lib/validateEvent';
 import { CalendarEvent, ValidationError } from '@/types';
+
+const VERSION = 1;
+const STORAGE_KEY = `calendar-event-${VERSION}`;
 
 const initialCalendarEvent: Partial<CalendarEvent> = {
   title: '',
@@ -24,8 +27,34 @@ const initialCalendarEvent: Partial<CalendarEvent> = {
   },
 };
 
+const getInitialCalendarEvent = (): Partial<CalendarEvent> => {
+  const storedEvent = localStorage.getItem(STORAGE_KEY);
+
+  if (storedEvent) {
+    const parsedEvent = JSON.parse(storedEvent);
+
+    return {
+      ...parsedEvent,
+      date: new Date(parsedEvent.date),
+      alarms: Object.fromEntries(
+        Object.entries(parsedEvent.alarms).map(([key, value]) => [
+          parseInt(key, 10),
+          value,
+        ])
+      ),
+    } as Partial<CalendarEvent>;
+  }
+
+  return initialCalendarEvent;
+};
+
 export const App = () => {
-  const [calendarEvent, setCalendarEvent] = useState(initialCalendarEvent);
+  const [calendarEvent, setCalendarEvent] = useState(getInitialCalendarEvent());
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(calendarEvent));
+  }, [calendarEvent]);
+
   const [validationErrors, setValidationErrors] = useState<ValidationError[]>(
     []
   );
