@@ -50,7 +50,7 @@ export const App = () => {
   };
 
   return (
-    <main className="p-3 max-w-screen-sm mx-auto sm:my-auto">
+    <main className="p-3 w-full max-w-screen-sm mx-auto sm:my-auto">
       <h1 className="font-bold text-2xl sm:text-3xl mb-3 sm:mb-6">
         Create a calendar event
       </h1>
