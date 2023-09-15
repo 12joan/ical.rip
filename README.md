@@ -1,4 +1,4 @@
-![Screenshot](screenshot.png)
+![Screenshot](.github/assets/screenshot.png)
 
 <h1 align="center"><a href="https://ical.rip/">ical.rip</a></h1>
 
