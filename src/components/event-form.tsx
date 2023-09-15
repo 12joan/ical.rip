@@ -44,7 +44,7 @@ export const EventForm = ({
 
   const setField = <K extends keyof CalendarEvent>(
     field: K,
-    value: CalendarEvent[K]
+    value?: CalendarEvent[K]
   ) => {
     setCalendarEvent({
       ...calendarEvent,
@@ -120,7 +120,7 @@ export const EventForm = ({
         {(props) => (
           <Checkbox
             checked={allDay}
-            onCheckedChange={(checked) => setField('allDay', checked)}
+            onCheckedChange={(checked) => setField('allDay', checked === true)}
             {...props}
           />
         )}
