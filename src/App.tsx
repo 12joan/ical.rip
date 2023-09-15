@@ -1,18 +1,19 @@
 import React from 'react';
 import { useState } from 'react'
 import { CalendarEvent, ValidationError } from '@/types'
-import { EventForm } from '@/components/event-form';
-import { validateEvent } from '@/lib/validateEvent';
+import { EventForm } from '@/components/event-form'
+import { validateEvent } from '@/lib/validateEvent'
+import { downloadEvent } from '@/lib/downloadEvent'
 
 const initialCalendarEvent: Partial<CalendarEvent> = {
   title: '',
-  date: undefined,
+  date: new Date(),
   allDay: false,
   startTime: '',
   endTime: '',
   location: '',
   url: '',
-  description: '',
+  description: 'Created with https://ical.rip/',
 }
 
 export const App = () => {
@@ -23,7 +24,7 @@ export const App = () => {
     const result = validateEvent(calendarEvent)
 
     if (result.valid) {
-      console.log(result.calendarEvent)
+      downloadEvent(result.calendarEvent)
       setValidationErrors([])
     } else {
       setValidationErrors(result.errors)
