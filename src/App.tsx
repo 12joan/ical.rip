@@ -26,7 +26,18 @@ export const App = () => {
     const result = validateEvent(calendarEvent);
 
     if (result.valid) {
-      downloadEvent(result.calendarEvent);
+      try {
+        downloadEvent(result.calendarEvent);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+
+        // eslint-disable-next-line no-alert
+        alert(
+          'Something unexpected went wrong. Please check your inputs and try again.'
+        );
+      }
+
       setValidationErrors([]);
     } else {
       setValidationErrors(result.errors);
