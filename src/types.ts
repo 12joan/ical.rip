@@ -7,6 +7,7 @@ export type CalendarEvent = {
   location?: string;
   url?: string;
   description?: string;
+  alarms: Record<number, boolean>;
 };
 
 export type ValidationError = {

@@ -14,6 +14,14 @@ const initialCalendarEvent: Partial<CalendarEvent> = {
   location: '',
   url: '',
   description: 'Created with https://ical.rip/',
+  alarms: {
+    0: false,
+    [15 * 60]: false,
+    [30 * 60]: false,
+    [60 * 60]: true,
+    [2 * 60 * 60]: false,
+    [24 * 60 * 60]: false,
+  },
 };
 
 export const App = () => {

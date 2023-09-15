@@ -13,6 +13,7 @@ const toICalData = ({
   location,
   url,
   description,
+  alarms,
 }: CalendarEvent): ICalEventData => {
   const [start, end] = [startTime, endTime].map((rawTime) => {
     if (allDay) return null;
@@ -36,6 +37,18 @@ const toICalData = ({
     location: location?.trim() || undefined,
     url: url?.trim() || undefined,
     description: description?.trim() || undefined,
+    alarms: allDay
+      ? []
+      : Object.entries(alarms)
+          .filter(([, enabled]) => enabled)
+          .map(
+            ([offsetString]) =>
+              ({
+                type: 'display',
+                // https://github.com/sebbo2002/ical-generator/issues/519
+                trigger: parseInt(offsetString, 10) || 1,
+              } as any)
+          ),
   };
 };
 

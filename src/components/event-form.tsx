@@ -1,5 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 import { Calendar as CalendarIcon } from 'lucide-react';
 
 import { FormField } from '@/components/form-field';
@@ -7,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
+import { labelVariants } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
@@ -15,6 +18,9 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { CalendarEvent, ValidationError } from '@/types';
+
+TimeAgo.addDefaultLocale(en);
+const timeAgo = new TimeAgo('en-US');
 
 export interface EventFormProps {
   calendarEvent: Partial<CalendarEvent>;
@@ -40,6 +46,7 @@ export const EventForm = ({
     endTime,
     url,
     description,
+    alarms,
   } = calendarEvent;
 
   const setField = <K extends keyof CalendarEvent>(
@@ -172,6 +179,42 @@ export const EventForm = ({
             {Intl.DateTimeFormat().resolvedOptions().timeZone}). It will be
             converted automatically for people in other time zones.
           </p>
+
+          <fieldset id="alarms">
+            <legend className={cn(labelVariants(), 'mb-3')}>Alarms</legend>
+
+            <div className="grid xs:grid-cols-2 sm:grid-cols-3 gap-2">
+              {Object.entries(alarms ?? {}).map(([offsetString, enabled]) => (
+                <FormField
+                  key={`alarm-${offsetString}`}
+                  label={(() => {
+                    const offset = parseInt(offsetString, 10);
+                    if (offset === 0) return 'At time of event';
+                    const agoString = timeAgo.format(-offset * 1000, {
+                      now: 0,
+                    });
+                    return agoString.replace('ago', 'before');
+                  })()}
+                  labelPosition="after"
+                  field={`alarms.${offsetString}` as any}
+                  validationErrors={validationErrors}
+                >
+                  {(props) => (
+                    <Checkbox
+                      checked={enabled}
+                      onCheckedChange={(checked) =>
+                        setField('alarms', {
+                          ...alarms,
+                          [offsetString]: checked === true,
+                        })
+                      }
+                      {...props}
+                    />
+                  )}
+                </FormField>
+              ))}
+            </div>
+          </fieldset>
         </>
       )}
 
