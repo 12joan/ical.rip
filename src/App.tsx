@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { GitHubLogoIcon as GitHubIcon } from '@radix-ui/react-icons';
 
 import { EventForm } from '@/components/event-form';
+import { buttonVariants } from '@/components/ui/button';
 import { downloadEvent } from '@/lib/downloadEvent';
+import { cn } from '@/lib/utils';
 import { validateEvent } from '@/lib/validateEvent';
 import { CalendarEvent, ValidationError } from '@/types';
 
@@ -87,18 +90,36 @@ export const App = () => {
   };
 
   return (
-    <main className="p-3 w-full max-w-screen-sm mx-auto sm:my-auto">
-      <h1 className="font-bold text-2xl sm:text-3xl mb-3 sm:mb-6">
-        Create a calendar event
-      </h1>
+    <>
+      <main className="w-full max-w-screen-sm mx-auto sm:my-auto">
+        <div className="mb-3 sm:mb-6 space-y-2">
+          <h1 className="font-bold text-2xl">Create a calendar event</h1>
 
-      <EventForm
-        calendarEvent={calendarEvent}
-        setCalendarEvent={setCalendarEvent}
-        validationErrors={validationErrors}
-        onSubmit={handleSubmit}
-        onReset={handleReset}
-      />
-    </main>
+          <p className="sm:text-lg font-light mb-3 sm:mb-6">
+            Generate an iCal file that you can share with other attendees
+          </p>
+        </div>
+
+        <EventForm
+          calendarEvent={calendarEvent}
+          setCalendarEvent={setCalendarEvent}
+          validationErrors={validationErrors}
+          onSubmit={handleSubmit}
+          onReset={handleReset}
+        />
+      </main>
+
+      <footer className="text-center sm:text-right">
+        <a
+          className={cn(buttonVariants({ variant: 'link' }), 'p-0 gap-1.5')}
+          href="https://github.com/12joan/ical.rip"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <GitHubIcon />
+          GitHub
+        </a>
+      </footer>
+    </>
   );
 };
