@@ -7,14 +7,20 @@ export interface FormFieldProps {
   label: string;
   labelPosition?: 'before' | 'after';
   field: keyof CalendarEvent;
+  required?: boolean;
   validationErrors: ValidationError[];
-  children: (props: { id: string; 'aria-invalid': boolean }) => React.ReactNode;
+  children: (props: {
+    id: string;
+    'aria-invalid': boolean;
+    'aria-required': boolean;
+  }) => React.ReactNode;
 }
 
 export const FormField = ({
   label,
   labelPosition = 'before',
   field,
+  required = false,
   validationErrors,
   children,
 }: FormFieldProps) => {
@@ -23,7 +29,16 @@ export const FormField = ({
     [validationErrors, field]
   );
 
-  const labelElement = <Label htmlFor={field}>{label}</Label>;
+  const labelElement = (
+    <Label htmlFor={field}>
+      {label}
+      {required && (
+        <span className="text-primary" title="Required">
+          &nbsp;*
+        </span>
+      )}
+    </Label>
+  );
 
   return (
     <div className="space-y-1">
@@ -32,6 +47,7 @@ export const FormField = ({
       <div className="flex items-center gap-2">
         {children({
           id: field,
+          'aria-required': required,
           'aria-invalid': fieldErrors.length > 0,
         })}
 

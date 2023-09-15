@@ -67,6 +67,7 @@ export const EventForm = ({
       <FormField
         label="Title"
         field="title"
+        required
         validationErrors={validationErrors}
       >
         {(props) => (
@@ -75,13 +76,17 @@ export const EventForm = ({
             onChange={(e) => setField('title', e.target.value)}
             placeholder="My fabulous event"
             autoFocus
-            aria-required
             {...props}
           />
         )}
       </FormField>
 
-      <FormField label="Date" field="date" validationErrors={validationErrors}>
+      <FormField
+        label="Date"
+        field="date"
+        required
+        validationErrors={validationErrors}
+      >
         {(props) => (
           <Popover>
             <PopoverTrigger asChild>
@@ -91,7 +96,6 @@ export const EventForm = ({
                   'w-full justify-start text-left font-normal',
                   !date && 'text-muted-foreground'
                 )}
-                aria-required
                 {...props}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
@@ -132,6 +136,7 @@ export const EventForm = ({
             <FormField
               label="Start time"
               field="startTime"
+              required
               validationErrors={validationErrors}
             >
               {(props) => (
@@ -148,6 +153,7 @@ export const EventForm = ({
             <FormField
               label="End time"
               field="endTime"
+              required
               validationErrors={validationErrors}
             >
               {(props) => (
