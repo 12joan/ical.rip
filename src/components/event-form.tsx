@@ -261,7 +261,7 @@ export const EventForm = ({
       </FormField>
 
       <div className="flex max-sm:flex-col gap-2">
-        <Button type="submit">Download .ical file</Button>
+        <Button type="submit">Download iCal file</Button>
         <Button variant="outline" type="reset">
           Reset form
         </Button>
