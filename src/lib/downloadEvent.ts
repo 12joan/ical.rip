@@ -16,10 +16,16 @@ const toICalData = ({
 }: CalendarEvent): ICalEventData => {
   const [start, end] = [startTime, endTime].map((rawTime) => {
     if (allDay) return null;
+
     const time = rawTime && normalizeTime(rawTime);
     if (!time) return null;
-    const dateWithoutTime = date.toISOString().split('T')[0];
-    return new Date(`${dateWithoutTime}T${time}`);
+
+    const dateWithoutTime = `${date.getFullYear()}-${
+      date.getMonth() + 1
+    }-${date.getDate()}`;
+
+    // This will be parsed in the user's time zone and converted to UTC
+    return new Date(`${dateWithoutTime} ${time}`);
   });
 
   return {

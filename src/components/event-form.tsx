@@ -127,37 +127,46 @@ export const EventForm = ({
       </FormField>
 
       {!allDay && (
-        <div className="grid sm:grid-cols-2 gap-3">
-          <FormField
-            label="Start time"
-            field="startTime"
-            validationErrors={validationErrors}
-          >
-            {(props) => (
-              <Input
-                value={startTime}
-                onChange={(e) => setField('startTime', e.target.value)}
-                placeholder="10:00"
-                {...props}
-              />
-            )}
-          </FormField>
+        <>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <FormField
+              label="Start time"
+              field="startTime"
+              validationErrors={validationErrors}
+            >
+              {(props) => (
+                <Input
+                  value={startTime}
+                  onChange={(e) => setField('startTime', e.target.value)}
+                  placeholder="10:00"
+                  aria-describedby="startTimeHint"
+                  {...props}
+                />
+              )}
+            </FormField>
 
-          <FormField
-            label="End time"
-            field="endTime"
-            validationErrors={validationErrors}
-          >
-            {(props) => (
-              <Input
-                value={endTime}
-                onChange={(e) => setField('endTime', e.target.value)}
-                placeholder="11:00"
-                {...props}
-              />
-            )}
-          </FormField>
-        </div>
+            <FormField
+              label="End time"
+              field="endTime"
+              validationErrors={validationErrors}
+            >
+              {(props) => (
+                <Input
+                  value={endTime}
+                  onChange={(e) => setField('endTime', e.target.value)}
+                  placeholder="11:00"
+                  {...props}
+                />
+              )}
+            </FormField>
+          </div>
+
+          <p id="startTimeHint" className="text-sm text-muted-foreground">
+            Use your local time zone (
+            {Intl.DateTimeFormat().resolvedOptions().timeZone}). It will be
+            converted automatically for people in other time zones.
+          </p>
+        </>
       )}
 
       <FormField
