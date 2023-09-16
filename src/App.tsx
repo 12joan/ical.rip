@@ -38,7 +38,7 @@ const getInitialCalendarEvent = (): Partial<CalendarEvent> => {
 
     return {
       ...parsedEvent,
-      date: new Date(parsedEvent.date),
+      date: parsedEvent.date ? new Date(parsedEvent.date) : undefined,
       alarms: Object.fromEntries(
         Object.entries(parsedEvent.alarms).map(([key, value]) => [
           parseInt(key, 10),
