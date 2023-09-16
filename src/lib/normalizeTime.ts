@@ -12,11 +12,7 @@
  */
 
 export const normalizeTime = (time: string): string | null => {
-  const trimmedTime = time
-    .replace(/\s/g, '')
-    .replace(/\./g, ':')
-    .toLowerCase()
-    .replace(/am$/, '');
+  const trimmedTime = time.replace(/\s/g, '').replace(/\./g, ':').toLowerCase();
 
   const strippedTime = trimmedTime.replace(/[^0-9]/g, '');
 
@@ -28,8 +24,17 @@ export const normalizeTime = (time: string): string | null => {
     .map((x) => (x === undefined ? undefined : parseInt(x, 10)));
   if (rawHours === undefined) return null;
 
-  const hours =
-    trimmedTime.endsWith('pm') && rawHours < 12 ? rawHours + 12 : rawHours;
+  const hours = (() => {
+    if (rawHours === 0) return 0;
+
+    if (rawHours === 12) {
+      if (trimmedTime.endsWith('am')) return 0;
+      return 12;
+    }
+
+    if (trimmedTime.endsWith('pm')) return rawHours + 12;
+    return rawHours;
+  })();
 
   if (hours > 23 || minutes > 59 || seconds > 59) return null;
 
