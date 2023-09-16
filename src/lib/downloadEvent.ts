@@ -21,12 +21,12 @@ const toICalData = ({
     const time = rawTime && normalizeTime(rawTime);
     if (!time) return null;
 
-    const dateWithoutTime = `${date.getFullYear()}-${
-      date.getMonth() + 1
-    }-${date.getDate()}`;
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
 
     // This will be parsed in the user's time zone and converted to UTC
-    return new Date(`${dateWithoutTime} ${time}`);
+    return new Date(`${year}-${month}-${day} ${time}`);
   });
 
   return {
