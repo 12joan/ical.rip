@@ -45,8 +45,7 @@ const toICalData = ({
             ([offsetString]) =>
               ({
                 type: 'display',
-                // https://github.com/sebbo2002/ical-generator/issues/519
-                trigger: parseInt(offsetString, 10) || 1,
+                trigger: parseInt(offsetString, 10),
               } as any)
           ),
   };
@@ -55,7 +54,7 @@ const toICalData = ({
 export const downloadEvent = (event: CalendarEvent) => {
   const calendar = ical();
   calendar.createEvent(toICalData(event));
-  const blob = calendar.toBlob();
+  const blob = new Blob([calendar.toString()], { type: 'text/calendar' });
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement('a');
   anchor.href = url;

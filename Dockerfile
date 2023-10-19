@@ -1,7 +1,6 @@
 FROM --platform=linux/amd64 node:latest
 WORKDIR /app
 COPY package.json yarn.lock ./
-COPY patches ./patches
 RUN yarn install --frozen-lockfile --non-interactive
 COPY . .
 RUN yarn build
