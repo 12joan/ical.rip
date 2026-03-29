@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:latest
+FROM node:alpine
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile --non-interactive
@@ -7,5 +7,6 @@ RUN yarn build
 
 FROM nginx:alpine
 COPY --from=0 /app/dist /usr/share/nginx/html
+HEALTHCHECK --start-period=1s --start-interval=1s \
+  CMD curl -f http://localhost/ || exit 1
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
