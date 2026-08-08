@@ -20,7 +20,7 @@
     "date-fns": "^4.4.0",
     "ical-generator": "^11.1.0",
     "javascript-time-ago": "^2.5.9",
-    "lucide-react": "^1.28.0",
+    "lucide-react": "^1.30.0",
     "react": "^19.2.8",
     "react-day-picker": "^8.8.2",
     "react-dom": "^19.2.8",
