@@ -19,7 +19,7 @@
     "clsx": "^2.0.0",
     "date-fns": "^4.4.0",
     "ical-generator": "^11.1.0",
-    "javascript-time-ago": "^2.5.9",
+    "javascript-time-ago": "^2.6.4",
     "lucide-react": "^1.30.0",
     "react": "^19.2.8",
     "react-day-picker": "^8.8.2",
