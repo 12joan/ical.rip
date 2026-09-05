@@ -3257,12 +3257,12 @@ jackspeak@^3.1.2:
   optionalDependencies:
     "@pkgjs/parseargs" "^0.11.0"
 
-javascript-time-ago@^2.5.9:
-  version "2.5.9"
-  resolved "https://registry.yarnpkg.com/javascript-time-ago/-/javascript-time-ago-2.5.9.tgz#3c5d8012cd493d764c6b26a0ffe6e8b20afcf1fe"
-  integrity sha512-pQ8mNco/9g9TqWXWWjP0EWl6i/lAQScOyEeXy5AB+f7MfLSdgyV9BJhiOD1zrIac/lrxPYOWNbyl/IW8CW5n0A==
+javascript-time-ago@^2.6.4:
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/javascript-time-ago/-/javascript-time-ago-2.6.4.tgz#3149de049ffe3c374eb5a357cd9aaa911aa98fb9"
+  integrity sha512-7K/Z37LuwVaxxjutUDd1pXpznufPcox0b1UYu00ksAMMlV6IsxIvduwL3kgfPxuBVF8jVj7nhrKMPDslMq94aQ==
   dependencies:
-    relative-time-format "^1.1.6"
+    relative-time-format "^1.1.12"
 
 jest-changed-files@30.5.1:
   version "30.5.1"
@@ -4426,10 +4426,10 @@ regexp.prototype.flags@^1.5.3, regexp.prototype.flags@^1.5.4:
     gopd "^1.2.0"
     set-function-name "^2.0.2"
 
-relative-time-format@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/relative-time-format/-/relative-time-format-1.1.6.tgz#724a5fbc3794b8e0471b6b61419af2ce699eb9f1"
-  integrity sha512-aCv3juQw4hT1/P/OrVltKWLlp15eW1GRcwP1XdxHrPdZE9MtgqFpegjnTjLhi2m2WI9MT/hQQtE+tjEWG1hgkQ==
+relative-time-format@^1.1.12:
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/relative-time-format/-/relative-time-format-1.1.12.tgz#2236c98c48047664bbff0643283dd4f317d26079"
+  integrity sha512-qaZBjmRIuXLfuLnzgqpFdBPa5W0euSX1tMnoMUHGPphLwJmrt8xbNiOIHrlvYOD6oNJ0M5owPCZyPibI8de5pQ==
 
 require-directory@^2.1.1:
   version "2.1.1"
