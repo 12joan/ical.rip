@@ -22,7 +22,7 @@
     "javascript-time-ago": "^2.5.9",
     "lucide-react": "^1.41.0",
     "react": "^19.2.8",
-    "react-day-picker": "^8.8.2",
+    "react-day-picker": "^10.0.1",
     "react-dom": "^19.2.8",
     "sanitize-filename": "^1.6.4",
     "tailwind-merge": "^3.6.0",
