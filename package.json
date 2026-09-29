@@ -18,7 +18,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.0.0",
     "date-fns": "^4.4.0",
-    "ical-generator": "^11.1.1",
+    "ical-generator": "^11.1.2",
     "javascript-time-ago": "^2.5.9",
     "lucide-react": "^1.48.0",
     "react": "^19.3.0",
